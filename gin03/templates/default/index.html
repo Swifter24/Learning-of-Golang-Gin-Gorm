@@ -1,0 +1,55 @@
+{{ define  "default/index.html" }}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>index</title>
+</head>
+<body>
+    <h2>Index</h2>
+    {{.msg}}
+<!--    定义变量-->
+{{ $t := .msg}}
+    <br>
+{{$t}}
+    <br>
+<!--    条件判断-->
+{{if gt .score 90}}
+优秀
+{{else if gt .score 80}}
+良好
+{{else if gt .score 60}}
+合格
+{{else}}
+不及格
+{{end}}
+<!--循环-->
+    <ul>
+        {{range $i, $v := .hobby}}
+        <li>{{$v}}</li>
+        {{end}}
+    </ul>
+    <ul>
+        {{range $i, $v := .hobby1}}
+        <li>{{$v}}</li>
+        {{else}}
+        <li>切片中没有数据</li>
+        {{end}}
+    </ul>
+    <br>
+<!--with-->
+{{with .news}}
+    <p>{{.Title}}</p>
+    <p>{{.Content}}</p>
+{{end}}
+    <br>
+<!--自定义模版函数-->
+{{UnixToTime .date}}
+    <br>
+{{Println .news.Title .msg}}
+</body>
+</html>
+{{end}}
